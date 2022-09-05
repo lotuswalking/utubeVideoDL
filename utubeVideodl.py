@@ -4,15 +4,15 @@ from pytube import YouTube
 import os
 
 # YouTube('https://www.youtube.com/watch?v=PjvU9xUw_XY').streams.first().download()
-url = 'https://www.youtube.com/watch?v='+'SgOBUJnVERo'
+url = 'https://www.youtube.com/watch?v='+'a_7Z7C_JCyo'
 yt = YouTube(url)
-print(yt.streams)
-saveFolder = 'd:\\mp3\\'
+print(yt.streams.filter(type="video"))
+saveFolder = 'd:\\mp4\\'
 oldFileName = saveFolder+yt.title.replace(" ", "_")+".mp4"
 newFileName = saveFolder+yt.title.replace(" ", "_")+".mp3"
 # 下载mp4音频
 xx = yt.streams.filter(
-    type="audio", mime_type="video/mp4").order_by("abr").desc().first()
+    type="video", mime_type="video/mp4").order_by("abr").desc().first()
 xx.download(output_path=saveFolder, skip_existing=True,
             filename=oldFileName)
 print("file "+oldFileName+" is done!")
