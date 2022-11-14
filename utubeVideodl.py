@@ -16,14 +16,12 @@ def convertToMp3(subject):
 
 # https://www.youtube.com/watch?v=yoZJWWrGbi4
 # YouTube('https://www.youtube.com/watch?v=PjvU9xUw_XY').streams.first().download()
-url = 'https://www.youtube.com/watch?v='+'SXGl-J1sEMQ'
+url = 'https://www.youtube.com/watch?v='+'a_7Z7C_JCyo'
 yt = YouTube(url)
 print(yt.streams.filter(type="video"))
 saveFolder = 'd:\\mp4\\'
-oldFileName = saveFolder + \
-    yt.title.replace(" ", "_").replace(":", "").replace(
-        "|", "").replace("-", "")+".mp4"
-oldFileName = oldFileName.replace("/", "")
+oldFileName = saveFolder+yt.title.replace(" ", "_")+".mp4"
+newFileName = saveFolder+yt.title.replace(" ", "_")+".mp3"
 # 下载mp4音频
 xx = yt.streams.filter(
     type="video", mime_type="video/mp4").order_by("abr").desc().first()
