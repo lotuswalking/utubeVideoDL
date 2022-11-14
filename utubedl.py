@@ -4,12 +4,13 @@ from pydub import AudioSegment
 import os
 
 # YouTube('https://www.youtube.com/watch?v=PjvU9xUw_XY').streams.first().download()
-url = 'https://www.youtube.com/watch?v='+'SgOBUJnVERo'
+url = 'https://www.youtube.com/watch?v='+'Grd7B0OtVSA'
 yt = YouTube(url)
 print(yt.streams)
 saveFolder = 'd:\\mp3\\'
-oldFileName = saveFolder+yt.title.replace(" ", "_")+".mp4"
-newFileName = saveFolder+yt.title.replace(" ", "_")+".mp3"
+oldFileName = saveFolder+yt.title.replace(" ", "_").replace(":","").replace("|","").replace("-","")+".mp4"
+oldFileName = oldFileName.replace("/","")
+newFileName = oldFileName.replace(".mp4", ".mp3")
 # 下载mp4音频
 xx = yt.streams.filter(
     type="audio", mime_type="audio/mp4").order_by("abr").desc().first()
