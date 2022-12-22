@@ -5,7 +5,11 @@ from moviepy.editor import *
 # pip install python-vlc
 import os
 
-
+def charReplace(inStr):
+    replacement=["@","_","(",")","|","-","/",":","《","》","：","“"," ",'"','（','）']
+    for char in replacement:
+        inStr = inStr.replace(char,"")
+    return inStr
 def convertToMp3(oldFileName):
 
     newFileName = oldFileName.replace("mp4", "mp3")
@@ -15,14 +19,11 @@ def convertToMp3(oldFileName):
 
 # https://www.youtube.com/watch?v=yoZJWWrGbi4
 # YouTube('https://www.youtube.com/watch?v=PjvU9xUw_XY').streams.first().download()
-url = 'https://www.youtube.com/watch?v='+'wgDYap0iJqk'
+url = 'https://www.youtube.com/watch?v='+'2aBNmb4m9eg'
 yt = YouTube(url)
 print(yt.streams.filter(type="video")[0])
 saveFolder = 'd:\\mp4\\'
-oldFileName = saveFolder + \
-    yt.title.replace(" ", "_").replace(":", "").replace(
-        "|", "").replace("-", "")+".mp4"
-oldFileName = oldFileName.replace("/", "")
+oldFileName = saveFolder + charReplace(yt.title)+".mp4"
 # 下载mp4音频
 xx = yt.streams.filter(
     type="video", mime_type="video/mp4").order_by("abr").desc().first()

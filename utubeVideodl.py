@@ -6,22 +6,18 @@ import os
 # pip install pytube
 # pip install python-vlc
 
-
-def convertToMp3(subject):
-    oldFileName = 'd:\\mp4\\'+subject+'.mp4'
-    newFileName = 'd:\\mp3\\'+subject+'.mp3'
-    video = VideoFileClip(oldFileName)
-    video.audio.write_audiofile(newFileName)
-
-
+def charReplace(inStr):
+    replacement=["@","_","(",")","|","-","/",":","《","》","：","“"," ",'"','（','）']
+    for char in replacement:
+        inStr = inStr.replace(char,"")
+    return inStr
 # https://www.youtube.com/watch?v=yoZJWWrGbi4
 # YouTube('https://www.youtube.com/watch?v=PjvU9xUw_XY').streams.first().download()
-url = 'https://www.youtube.com/watch?v='+'a_7Z7C_JCyo'
+url = 'https://www.youtube.com/watch?v='+'v5Vq62nS-5U'
 yt = YouTube(url)
-print(yt.streams.filter(type="video"))
+print(yt.streams.filter(type="video").order_by("abr").desc.first())
 saveFolder = 'd:\\mp4\\'
-oldFileName = saveFolder+yt.title.replace(" ", "_")+".mp4"
-newFileName = saveFolder+yt.title.replace(" ", "_")+".mp3"
+oldFileName = saveFolder + charReplace(yt.title)+".mp4"
 # 下载mp4音频
 xx = yt.streams.filter(
     type="video", mime_type="video/mp4").order_by("abr").desc().first()
