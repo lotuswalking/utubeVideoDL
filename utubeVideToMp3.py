@@ -1,20 +1,10 @@
 from pytube import YouTube
-from moviepy.editor import *
+
 # pip install moviepy
 # pip install pytube
 # pip install python-vlc
 import os
-
-def charReplace(inStr):
-    replacement=["@","_","(",")","|","-","/",":","《","》","：","“"," ",'"','（','）']
-    for char in replacement:
-        inStr = inStr.replace(char,"")
-    return inStr
-def convertToMp3(oldFileName):
-
-    newFileName = oldFileName.replace("mp4", "mp3")
-    video = VideoFileClip(oldFileName)
-    video.audio.write_audiofile(newFileName)
+from mymodule import *
 
 
 # https://www.youtube.com/watch?v=yoZJWWrGbi4
