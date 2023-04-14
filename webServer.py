@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, send_from_directory,request
+from flask import Flask, render_template, send_from_directory,request,redirect
 from mymodule import *
 
 app = Flask(__name__)
+
 
 
 @app.route('/')
@@ -20,9 +21,7 @@ def download(filename):
 @app.route('/delete/<filename>')
 def delete(filename):
     os.remove("d:\\mp4\\"+filename)
-    title = "file deleted!"
-    file_list = os.listdir('D:\\mp4')
-    return render_template('index.html', title=title, file_list=file_list)
+    return redirect("/")
 
 @app.route('/', methods=['POST'])
 def submit_form():
