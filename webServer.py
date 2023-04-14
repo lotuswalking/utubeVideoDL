@@ -14,7 +14,7 @@ def index():
 
 @app.route('/download/<filename>')
 def download(filename):
-    return send_from_directory('D:\\mp4', filename)
+    return send_from_directory('D:\\mp4', filename, as_attachment=True)
 
 @app.route('/', methods=['POST'])
 def submit_form():
