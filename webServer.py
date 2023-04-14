@@ -16,6 +16,14 @@ def index():
 def download(filename):
     return send_from_directory('D:\\mp4', filename, as_attachment=True)
 
+
+@app.route('/delete/<filename>')
+def delete(filename):
+    os.remove("d:\\mp4\\"+filename)
+    title = "file deleted!"
+    file_list = os.listdir('D:\\mp4')
+    return render_template('index.html', title=title, file_list=file_list)
+
 @app.route('/', methods=['POST'])
 def submit_form():
     # print(request)
@@ -27,7 +35,9 @@ def submit_form():
     downloadVideo(waithId=url,newName=title,convert_to_mp3=convert_to_mp3)
     with open('data.txt', 'a',encoding='utf-8') as f:
         f.write(f'{url} {title} {convert_to_mp3}\n')
-    return render_template('response.html')
+    title = "File Download Succeed!"
+    file_list = os.listdir('D:\\mp4')
+    return render_template('index.html', title=title, file_list=file_list)
 
 
 if __name__ == '__main__':
