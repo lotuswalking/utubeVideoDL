@@ -1,3 +1,5 @@
+from pytube import YouTube
+from moviepy.editor import *
 
 def charReplace(inStr):
     replacement = ["@", "_", "(", ")", "|", "-", "/", ":",
