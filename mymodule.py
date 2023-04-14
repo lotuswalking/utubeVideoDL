@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 def charReplace(inStr):
     replacement = ["@", "_", "(", ")", "|", "-", "/", ":",
                    "《", "》", "：", "“", " ", '"', '（', '）', "#", " "]
@@ -39,6 +40,8 @@ def delete_first_line():
 
     # Do something with the first line
     print(first_line.strip())
+=======
+>>>>>>> 0704f78e53bf740a5ef25e1cdd011bea253150e8
     newFileName = oldFileName.replace(".mp4", ".mp3")
     video = VideoFileClip(oldFileName)
     video.audio.write_audiofile(newFileName)
