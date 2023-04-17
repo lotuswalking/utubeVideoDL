@@ -1,39 +1,28 @@
 <html>
+
 <head>
   <title>Post a URL</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-      <style>
-        .checkbox-label {
-          display: inline-block;
-        }
-      </style>
+  <style>
+    .checkbox-label {
+      display: inline-block;
+    }
+
+    /* Style for odd rows */
+    div.theader:nth-child(odd), 
+    div.tbody:nth-child(odd)
+    {
+      background-color: #b6afaf;
+    }
+  </style>
 </head>
+
 <body>
   <div class="container">
     <h1>{{title}}</h1>
-    <div class="list-group">
-
-        <div class="row">
-          <div class="col-6">文件名</div>
-          <div class="col">文件类型</div>
-          <div class="col">文件大小(MB)</div>
-          <div class="col">操作</div>
-        </div class="row">
-
-      {% for file in file_list %}
-      <div class="row">
-        <div class="col-6 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
-        <div class="col">{{ file.mimetype }}</div>
-        <div class="col">{{ file.filesize }}</div>
-        <div class="col">
-          <a class="btn btn-warning" href="/delete/{{ file.filename }}">delete</a>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
     <form method="POST" action="/">
       <div class="form-group">
         <label for="url">URL:</label>
@@ -50,6 +39,28 @@
 
       <button type="submit" class="btn btn-primary">Post</button>
     </form>
+    <div class="list-group">
+
+      <div class="row theader">
+        <div class="col-6">文件名</div>
+        <div class="col">文件类型</div>
+        <div class="col">文件大小(MB)</div>
+        <div class="col">操作</div>
+      </div class="row">
+
+      {% for file in file_list %}
+      <div class="row tbody">
+        <div class="col-6 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
+        <div class="col">{{ file.mimetype }}</div>
+        <div class="col">{{ file.filesize }}</div>
+        <div class="col">
+          <a class="btn btn-warning btn-sm" href="/delete/{{ file.filename }}">delete</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
   </div>
 </body>
+
 </html>

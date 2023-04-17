@@ -10,7 +10,7 @@ def getFileList():
     file_list = os.listdir(path)
     file_data = []
     for filename in file_list:
-        print(filename)
+        # print(filename)
         filepath = os.path.join(path, filename)
         mimetype, encoding = mimetypes.guess_type(filepath)
         if mimetype:
@@ -24,7 +24,7 @@ def getFileList():
                 'mimetype': mimetype,
                 'filesize': filesize
             })
-    print(file_data)       
+    # print(file_data)       
     return file_data
 
 @app.route('/')
