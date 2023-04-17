@@ -63,7 +63,7 @@ def delete_first_line():
             f.truncate()
 
     # Do something with the first line
-    print(first_line.strip())
-    newFileName = oldFileName.replace(".mp4", ".mp3")
-    video = VideoFileClip(oldFileName)
-    video.audio.write_audiofile(newFileName)
+    # print(first_line.strip())
+    # newFileName = oldFileName.replace(".mp4", ".mp3")
+    # video = VideoFileClip(oldFileName)
+    # video.audio.write_audiofile(newFileName)
