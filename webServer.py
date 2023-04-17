@@ -1,30 +1,13 @@
 import os
 from flask import Flask, render_template, send_from_directory,request,redirect
 from mymodule import *
-import mimetypes
+
 
 app = Flask(__name__)
 
 def getFileList():
     path = 'd:\\mp4'
-    file_list = os.listdir(path)
-    file_data = []
-    for filename in file_list:
-        # print(filename)
-        filepath = os.path.join(path, filename)
-        mimetype, encoding = mimetypes.guess_type(filepath)
-        if mimetype:
-            try:
-                filesize = os.path.getsize(filepath)/1024/1024
-            except:
-                filesize = 0
-            filesize = '%.1f MB' % filesize
-            file_data.append({
-                'filename': filename,
-                'mimetype': mimetype,
-                'filesize': filesize
-            })
-    # print(file_data)       
+    file_data = getFiles(path)
     return file_data
 
 @app.route('/')

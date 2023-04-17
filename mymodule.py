@@ -1,6 +1,6 @@
 from pytube import YouTube
 from moviepy.editor import *
-
+import mimetypes
 def charReplace(inStr):
     replacement = ["@", "_", "(", ")", "|", "-", "/", ":",
                    "《", "》", "：", "“", " ", '"', '（', '）', "#", " "]
@@ -8,6 +8,27 @@ def charReplace(inStr):
         inStr = inStr.replace(char, "")
     return inStr
 
+
+def getFiles(path):
+    file_list = os.listdir(path)
+    file_data = []
+    for filename in file_list:
+        # print(filename)
+        filepath = os.path.join(path, filename)
+        mimetype, encoding = mimetypes.guess_type(filepath)
+        if mimetype:
+            try:
+                filesize = os.path.getsize(filepath)/1024/1024
+            except:
+                filesize = 0
+            filesize = '%.1f MB' % filesize
+            file_data.append({
+                'filename': filename,
+                'mimetype': mimetype,
+                'filesize': filesize
+            })
+    # print(file_data)
+    return file_data
 def downloadVideo(waithId,newName,convert_to_mp3):
     if 'https://www.youtube' in waithId:
         url = waithId
