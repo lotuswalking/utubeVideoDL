@@ -21,7 +21,7 @@ def index():
                 filesize = os.path.getsize(filepath)/1024/1024
             except:
                 filesize =0
-            filesize = '%1f MB' % filesize
+            filesize = '%.1f MB' % filesize
             file_data.append({
                 'filename': filename,
                 'mimetype': mimetype,
