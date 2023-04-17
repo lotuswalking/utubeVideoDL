@@ -5,30 +5,33 @@ import mimetypes
 
 app = Flask(__name__)
 
-
-
-@app.route('/')
-def index():
-    title = "this is a youtube video downloader!"
+def getFileList():
     path = 'd:\\mp4'
     file_list = os.listdir(path)
     file_data = []
     for filename in file_list:
-        filepath = os.path.join(path,filename)
+        print(filename)
+        filepath = os.path.join(path, filename)
         mimetype, encoding = mimetypes.guess_type(filepath)
         if mimetype:
             try:
                 filesize = os.path.getsize(filepath)/1024/1024
             except:
-                filesize =0
-            filesize = '%.1f MB' % filesize
+                filesize = 0
+                filesize = '%.1f MB' % filesize
             file_data.append({
                 'filename': filename,
                 'mimetype': mimetype,
                 'filesize': filesize
             })
+    print(file_data)       
+    return file_data
 
-    return render_template('index.html',title=title,file_list=file_data)
+@app.route('/')
+def index():
+    title = "this is a youtube video downloader!"
+    
+    return render_template('index.html', title=title, file_list=getFileList())
 
 
 @app.route('/download/<filename>')
@@ -54,7 +57,8 @@ def submit_form():
         f.write(f'{url} {title} {convert_to_mp3}\n')
     title = "File Download Succeed!"
     file_list = os.listdir('D:\\mp4')
-    return render_template('index.html', title=title, file_list=file_list)
+    # return redirect("/")
+    return render_template('index.html', title=title, file_list=getFileList())
 
 
 if __name__ == '__main__':
