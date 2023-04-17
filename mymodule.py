@@ -14,13 +14,13 @@ def downloadVideo(waithId,newName,convert_to_mp3):
     else:
         url = 'https://www.youtube.com/watch?v='+waithId
     yt = YouTube(url)
-    print(yt.streams.filter(type="video"))
+    # print(yt.streams.filter(type="video"))
     saveFolder = 'd:\\mp4\\'
     oldFileName = saveFolder+newName+".mp4"
     # 下载mp4音频
     xx = yt.streams.filter(type="video", mime_type="video/mp4").order_by("abr").desc().first()
     xx.download(output_path=saveFolder, skip_existing=True,filename=oldFileName)
-    print("file "+oldFileName+" is done!")
+    # print("file "+oldFileName+" is done!")
     if convert_to_mp3:
         convertToMp3(fileName=oldFileName)
 
