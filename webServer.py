@@ -41,7 +41,10 @@ def download(filename):
 
 @app.route('/delete/<filename>')
 def delete(filename):
-    os.remove("d:\\mp4\\"+filename)
+    try:
+        os.remove("d:\\mp4\\"+filename)
+    except OSError as e:
+        print(e)
     return redirect("/")
 
 @app.route('/', methods=['POST'])

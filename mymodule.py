@@ -32,7 +32,6 @@ def convertToMp3(fileName):
 def delete_first_line():
     with open('data.txt', 'r+') as f:
         lines = f.readlines()
-
         if lines:
             first_line = lines[0]
             lines = lines[1:]
