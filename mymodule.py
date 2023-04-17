@@ -9,7 +9,10 @@ def charReplace(inStr):
     return inStr
 
 def downloadVideo(waithId,newName,convert_to_mp3):
-    url = 'https://www.youtube.com/watch?v='+waithId
+    if 'https://www.youtube' in url:
+        url = waithId
+    else:
+        url = 'https://www.youtube.com/watch?v='+waithId
     yt = YouTube(url)
     print(yt.streams.filter(type="video"))
     saveFolder = 'd:\\mp4\\'

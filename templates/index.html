@@ -14,18 +14,26 @@
 <body>
   <div class="container">
     <h1>{{title}}</h1>
-    <ul>
+    <div class="list-group">
+
+        <div class="row">
+          <div class="col-6">文件名</div>
+          <div class="col">文件类型</div>
+          <div class="col">文件大小(MB)</div>
+          <div class="col">操作</div>
+        </div class="row">
+
       {% for file in file_list %}
-      <li class="row">
-        <div class="col"><a href="/download/{{ file }}">{{ file }}</a></div>
-      
-      
+      <div class="row">
+        <div class="col-6 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
+        <div class="col">{{ file.mimetype }}</div>
+        <div class="col">{{ '%0.1f' % (file.filesize) }}</div>
         <div class="col">
-          <a class="btn btn-warning" href="/delete/{{ file }}">delete</a>
+          <a class="btn btn-warning" href="/delete/{{ file.filename }}">delete</a>
         </div>
-      </li>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
     <form method="POST" action="/">
       <div class="form-group">
         <label for="url">URL:</label>

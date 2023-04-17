@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, send_from_directory,request,redirect
 from mymodule import *
+import mimetypes
 
 app = Flask(__name__)
 
@@ -9,8 +10,21 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     title = "this is a youtube video downloader!"
-    file_list = os.listdir('D:\\mp4')
-    return render_template('index.html',title=title,file_list=file_list)
+    path = 'd:\\mp4'
+    file_list = os.listdir(path)
+    file_data = []
+    for filename in file_list:
+        filepath = os.path.join(path,filename)
+        mimetype, encoding = mimetypes.guess_type(filepath)
+        if mimetype:
+            filesize = os.path.getsize(filepath)/1024/1024
+            file_data.append({
+                'filename': filename,
+                'mimetype': mimetype,
+                'filesize': filesize
+            })
+
+    return render_template('index.html',title=title,file_list=file_data)
 
 
 @app.route('/download/<filename>')
