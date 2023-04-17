@@ -17,7 +17,11 @@ def index():
         filepath = os.path.join(path,filename)
         mimetype, encoding = mimetypes.guess_type(filepath)
         if mimetype:
-            filesize = os.path.getsize(filepath)/1024/1024
+            try:
+                filesize = os.path.getsize(filepath)/1024/1024
+            except:
+                filesize =0
+            filesize = '%1f MB' % filesize
             file_data.append({
                 'filename': filename,
                 'mimetype': mimetype,

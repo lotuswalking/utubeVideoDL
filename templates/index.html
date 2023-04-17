@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-6 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
         <div class="col">{{ file.mimetype }}</div>
-        <div class="col">{{ '%0.1f' % (file.filesize) }}</div>
+        <div class="col">{{ file.filesize }}</div>
         <div class="col">
           <a class="btn btn-warning" href="/delete/{{ file.filename }}">delete</a>
         </div>
