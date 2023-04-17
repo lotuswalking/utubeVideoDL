@@ -9,7 +9,7 @@ def charReplace(inStr):
     return inStr
 
 def downloadVideo(waithId,newName,convert_to_mp3):
-    if 'https://www.youtube' in url:
+    if 'https://www.youtube' in waithId:
         url = waithId
     else:
         url = 'https://www.youtube.com/watch?v='+waithId
