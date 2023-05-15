@@ -44,7 +44,7 @@
       <div class="row theader">
         <div class="col">操作</div>
         <div class="col-8">文件名</div>
-        <div class="col">文件类型</div>
+        <div class="col-2">文件类型</div>
         <div class="col-2">文件大小(MB)</div>
       </div class="row">
 
@@ -54,7 +54,7 @@
           <a class="btn btn-warning btn-sm" href="/delete/{{ file.filename }}">delete</a>
         </div>
         <div class="col-8 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
-        <div class="col">{{ file.mimetype }}</div>
+        <div class="col-2">{{ file.mimetype }}</div>
         <div class="col-2">{{ file.filesize }}</div>
         
       </div>
