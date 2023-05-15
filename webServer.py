@@ -17,8 +17,7 @@ def index():
     return render_template('index.html', title=title, file_list=getFileList())
 
 
-app.route('/fileList')
-
+@app.route('/fileList')
 
 def downlaodFileList():
     title = "this is file list to download"
