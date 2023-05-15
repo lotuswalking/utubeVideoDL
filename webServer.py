@@ -17,6 +17,15 @@ def index():
     return render_template('index.html', title=title, file_list=getFileList())
 
 
+app.route('/fileList')
+
+
+def downlaodFileList():
+    title = "this is file list to download"
+    myPath = getFolderPath("downloads")
+    print("myPath", myPath)
+    return render_template('index.html', title=title, file_list=getFiles(myPath))
+
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory('D:\\mp4', filename, as_attachment=True)

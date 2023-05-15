@@ -35,11 +35,12 @@ def downloadVideo(waithId,newName,convert_to_mp3):
     else:
         url = 'https://www.youtube.com/watch?v='+waithId
     yt = YouTube(url)
-    # print(yt.streams.filter(type="video"))
+    # yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
+    print(f"there are {len(yt.streams)} streams in the url")
     saveFolder = 'd:\\mp4\\'
     oldFileName = saveFolder+newName+".mp4"
     # 下载mp4音频
-    xx = yt.streams.filter(type="video", mime_type="video/mp4").order_by("abr").desc().first()
+    xx = yt.streams.filter(type="video").order_by("abr").desc().first()
     xx.download(output_path=saveFolder, skip_existing=True,filename=oldFileName)
     # print("file "+oldFileName+" is done!")
     if convert_to_mp3:
@@ -63,7 +64,7 @@ def delete_first_line():
             f.truncate()
 
     # Do something with the first line
-    # print(first_line.strip())
-    # newFileName = oldFileName.replace(".mp4", ".mp3")
-    # video = VideoFileClip(oldFileName)
-    # video.audio.write_audiofile(newFileName)
+    print(first_line.strip())
+    newFileName = oldFileName.replace(".mp4", ".mp3")
+    video = VideoFileClip(oldFileName)
+    video.audio.write_audiofile(newFileName)
