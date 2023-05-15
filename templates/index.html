@@ -42,20 +42,21 @@
     <div class="list-group">
 
       <div class="row theader">
+        <div class="col">操作</div>
         <div class="col-6">文件名</div>
         <div class="col">文件类型</div>
         <div class="col">文件大小(MB)</div>
-        <div class="col">操作</div>
       </div class="row">
 
       {% for file in file_list %}
       <div class="row tbody">
-        <div class="col-6 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
-        <div class="col">{{ file.mimetype }}</div>
-        <div class="col">{{ file.filesize }}</div>
         <div class="col">
           <a class="btn btn-warning btn-sm" href="/delete/{{ file.filename }}">delete</a>
         </div>
+        <div class="col-6 text-truncate"><a href="/download/{{ file.filename }}">{{ file.filename }}</a></div>
+        <div class="col">{{ file.mimetype }}</div>
+        <div class="col">{{ file.filesize }}</div>
+        
       </div>
       {% endfor %}
     </div>
