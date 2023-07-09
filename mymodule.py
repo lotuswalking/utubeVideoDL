@@ -29,14 +29,13 @@ def getFiles(path):
             })
     # print(file_data)
     return file_data
+
 def downloadVideo(waithId,newName,convert_to_mp3):
     if 'https://www.youtube' in waithId:
         url = waithId
     else:
         url = 'https://www.youtube.com/watch?v='+waithId
     yt = YouTube(url)
-    # yt.check_availability()
-    
     # yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     # print(f"there are {len(yt.streams)} streams in the url")
     saveFolder = 'd:\\mp4\\'
