@@ -46,10 +46,10 @@ def submit_form():
     convert_to_mp3 = False
     if 'convert_to_mp3' in request.form:
         convert_to_mp3 = True
-    downloadVideo(waithId=url,newName=title,convert_to_mp3=convert_to_mp3)
+    result  = downloadVideo(waithId=url,newName=title,convert_to_mp3=convert_to_mp3)
     with open('data.txt', 'a',encoding='utf-8') as f:
-        f.write(f'{url} {title} {convert_to_mp3}\n')
-    title = "File Download Succeed!"
+        f.write(f'{url} {title} {convert_to_mp3} {result}\n')
+    title = result
     file_list = os.listdir('D:\\mp4')
     # return redirect("/")
     return render_template('index.html', title=title, file_list=getFileList())

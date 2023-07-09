@@ -35,16 +35,32 @@ def downloadVideo(waithId,newName,convert_to_mp3):
     else:
         url = 'https://www.youtube.com/watch?v='+waithId
     yt = YouTube(url)
+    # yt.check_availability()
+    
     # yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
-    print(f"there are {len(yt.streams)} streams in the url")
+    # print(f"there are {len(yt.streams)} streams in the url")
     saveFolder = 'd:\\mp4\\'
     oldFileName = saveFolder+newName+".mp4"
-    # 下载mp4音频
-    xx = yt.streams.filter(type="video").order_by("abr").desc().first()
-    xx.download(output_path=saveFolder, skip_existing=True,filename=oldFileName)
+    mp3FileName = saveFolder+newName+".mp3"
+    
+    try:
+        # 下载mp4音频
+        if convert_to_mp3:
+            xx = yt.streams.filter(type="audio").order_by("abr").desc().first()
+            xx.download(output_path=saveFolder, skip_existing=True,filename=mp3FileName)
+        else:
+            xx = yt.streams.filter(type="video").order_by("abr").desc().first()
+            xx.download(output_path=saveFolder, skip_existing=True,filename=oldFileName)
+    except Exception as e:
+        return e
+        log('Reason:', e)       # Important!   
+    return "successed" 
+
+    
+    
     # print("file "+oldFileName+" is done!")
-    if convert_to_mp3:
-        convertToMp3(fileName=oldFileName)
+    # if convert_to_mp3:
+    #     convertToMp3(fileName=oldFileName)
 
 def convertToMp3(fileName):
     newFileName = fileName.replace(".mp4", ".mp3")
