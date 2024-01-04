@@ -45,7 +45,7 @@ def downloadVideo(waithId,newName,convert_to_mp3):
     try:
         # 下载mp4音频
         if convert_to_mp3:
-            audio = yt.streams.filter(only_audio=True).first()
+            audio = yt.streams.filter(only_audio=True).order_by("abr").desc().first()
             audio.download(output_path=saveFolder,skip_existing=True, filename=mp3FileName)
             # xx = yt.streams.filter(type="video").order_by("abr").asc().first()
             # xx.download(output_path=saveFolder,
