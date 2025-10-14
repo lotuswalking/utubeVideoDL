@@ -10,4 +10,6 @@ fix bug by update pytube
 
 `pip install pytube --upgrade`
 
+update to pytubefix
+
 https://github.com/pytube/pytube/issues/1602#issuecomment-1537134848

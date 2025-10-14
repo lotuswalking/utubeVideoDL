@@ -4,9 +4,8 @@ from mymodule import *
 
 
 app = Flask(__name__)
-
+path = 'd:\\mp4'
 def getFileList():
-    path = 'd:\\mp4'
     file_data = getFiles(path)
     return file_data
 
@@ -27,13 +26,13 @@ def downlaodFileList():
 
 @app.route('/download/<filename>')
 def download(filename):
-    return send_from_directory('D:\\mp4', filename, as_attachment=True)
+    return send_from_directory('D:\\mp3', filename, as_attachment=True)
 
 
 @app.route('/delete/<filename>')
 def delete(filename):
     try:
-        os.remove("d:\\mp4\\"+filename)
+        os.remove("d:\\mp3\\"+filename)
     except OSError as e:
         print(e)
     return redirect("/")
@@ -44,9 +43,13 @@ def submit_form():
     url = request.form['url']
     title = request.form['title']
     convert_to_mp3 = False
+    proxies = [""]
     if 'convert_to_mp3' in request.form:
         convert_to_mp3 = True
-    result  = downloadVideo(waithId=url,newName=title,convert_to_mp3=convert_to_mp3)
+        result = downloadM4a(waithId=url,newName=title)
+    else:
+        result  = downloadVideo(waithId=url,newName=title,convert_to_mp3=convert_to_mp3)
+
     with open('data.txt', 'a',encoding='utf-8') as f:
         f.write(f'{url} {title} {convert_to_mp3} {result}\n')
     title = result

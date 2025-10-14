@@ -1,6 +1,10 @@
-from pytube import YouTube
-from moviepy.editor import *
+# from pytube import YouTube
+from pytubefix import YouTube
+# from moviepy.editor import *
+import os
+
 import mimetypes
+saveFolder="d:\\mp3\\"
 def charReplace(inStr):
     replacement = ["@", "_", "(", ")", "|", "-", "/", ":",
                    "《", "》", "：", "“", " ", '"', '（', '）', "#", " "]
@@ -30,15 +34,25 @@ def getFiles(path):
     # print(file_data)
     return file_data
 
-def downloadVideo(waithId,newName,convert_to_mp3):
+def downloadM4a(waithId,newName,proxies=None):
     if 'https://www.youtube' in waithId:
         url = waithId
     else:
         url = 'https://www.youtube.com/watch?v='+waithId
-    yt = YouTube(url)
+    yt = YouTube(url, proxies=proxies)
+    mp3FileName=saveFolder+newName+".m4a"
+    ys = yt.streams.get_audio_only()
+    ys.download(output_path=saveFolder,skip_existing=True, filename=mp3FileName)
+
+def downloadVideo(waithId,newName,convert_to_mp3,proxies=None):
+    if 'https://www.youtube' in waithId:
+        url = waithId
+    else:
+        url = 'https://www.youtube.com/watch?v='+waithId
+    yt = YouTube(url, proxies=proxies)
     # yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     # print(f"there are {len(yt.streams)} streams in the url")
-    saveFolder = 'd:\\mp4\\'
+    # saveFolder = 'd:\\mp4\\'
     oldFileName = saveFolder+newName+".mp4"
     mp3FileName = saveFolder+newName+".mp3"
     
@@ -55,8 +69,9 @@ def downloadVideo(waithId,newName,convert_to_mp3):
             xx = yt.streams.filter(type="video").order_by("abr").desc().first()
             xx.download(output_path=saveFolder, skip_existing=True,filename=oldFileName)
     except Exception as e:
+        print('Reason:', e)       # Important!   
         return e
-        log('Reason:', e)       # Important!   
+        
     return "successed" 
 
     
