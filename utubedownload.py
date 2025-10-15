@@ -5,7 +5,7 @@ import argparse
 
 def main():
 	parser = argparse.ArgumentParser(description="YouTube下载器，支持简单和全参数模式")
-	parser.add_argument("url", help="YouTube视频URL")
+	parser.add_argument("--url", "-u",type=str, help="YouTube视频URL")
 	parser.add_argument("--audio-only", "-a", type=str, default="true", help="仅下载音频，true/false，默认true")
 	parser.add_argument("--proxy", "-p", type=str, default="http://10.62.220.124:8899", help="代理地址，默认http://10.62.220.124:8899")
 	args = parser.parse_args()
